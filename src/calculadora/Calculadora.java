@@ -3,34 +3,46 @@ package calculadora;
 public class Calculadora {
 
     public int calc(int a, int b, String op) {
-        int resultado = 0;
-
+        
         if (op == null) {
-            System.out.println("Operacao invalida! Nenhum operador informado");
-            return 0;
+            return erro("Operacao invalida! Nenhum operador informado");
         }
 
         switch (op) {
             case "+":
-                resultado = a + b;
-                break;
+                return somar(a, b);
             case "-":
-                resultado = a - b;
-                break;
+                return subtrair(a, b);
             case "*":
-                resultado = a * b;
-                break;
+                return multiplicar(a, b);
             case "/":
-                if (b == 0) {
-                    System.out.println("Erro! nao e possivel dividir por zero");
-                } else {
-                    resultado = a / b;
-                }
-                break;
+                return dividir(a, b);
             default:
-                System.out.println("Operacao invalida: '" + op + "'");
+                return erro("Operacao invalida: '" + op + "'");
         }
+    }
 
-        return resultado;
+    private int somar(int a, int b) {
+        return a + b;
+    }
+
+    private int subtrair(int a, int b) {
+        return a - b;
+    }
+
+    private int multiplicar(int a, int b) {
+        return a * b;
+    }
+
+    private int dividir(int a, int b) {
+        if (b == 0) {
+            return erro("Erro! nao e possivel dividir por zero");
+        }
+        return a / b;
+    }
+
+    private int erro(String mensagem) {
+        System.out.println(mensagem);
+        return 0;
     }
 }
